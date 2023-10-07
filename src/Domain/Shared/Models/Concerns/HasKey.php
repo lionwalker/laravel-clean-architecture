@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits;
+namespace Domain\Shared\Models\Concerns;
 
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;

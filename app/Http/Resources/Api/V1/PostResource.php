@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Api\V1;
 
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -23,7 +24,9 @@ class PostResource extends JsonResource
                 'description' => $this->description,
                 'published' => $this->published,
             ],
-            'relationships' => [],
+            'relationships' => [
+                'user' => new UserResource($this->whenLoaded('user'))
+            ],
             'links' => [
                 'self' => route('api:v1:posts:show', $this->key),
             ]

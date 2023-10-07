@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Models;
+namespace Domain\Blogging\Models;
 
-use App\Traits\HasKey;
-use App\Traits\HasSlug;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Domain\Shared\Models\User;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Domain\Shared\Models\Concerns\HasKey;
+use Domain\Blogging\Models\Concerns\HasSlug;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Domain\Blogging\Models\Builders\PostBuilder;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Post extends Model
 {
@@ -45,5 +47,10 @@ class Post extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function newEloquentBuilder($query): PostBuilder
+    {
+        return new PostBuilder($query);
     }
 }
